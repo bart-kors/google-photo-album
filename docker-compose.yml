@@ -1,0 +1,15 @@
+version: '2'
+services:
+  mysql:
+    image: mysql:latest
+    environment:
+      MYSQL_DATABASE: googlealbum
+      MYSQL_USER: google
+      MYSQL_PASSWORD: google
+      MYSQL_ROOT_PASSWORD: google
+  tomcat:
+    build: ./docker
+    ports:
+      - 8080:8080
+    links:
+      - mysql

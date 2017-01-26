@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+	layout:decorator="layout">
+<head>
+<title>Messages : Create</title>
+</head>
+<body>
+	<div layout:fragment="content" class="container">
+		<form id="messageForm" th:action="@{/(form)}" th:object="${album}"
+			action="#" method="post">
+			<div th:if="${#fields.hasErrors('*')}" class="alert alert-error">
+				<p th:each="error : ${#fields.errors('*')}" th:text="${error}">
+					Validation error</p>
+			</div>
+			<div class="pull-right">
+				<a th:href="@{/albums}" href="albums.html"> Albums </a>
+			</div>
+			<input type="hidden" th:field="*{id}"
+				th:class="${#fields.hasErrors('id')} ? 'field-error'" /> <label
+				for="googleUrl">Google Album Url</label> <input type="text"
+				th:field="*{googleUrl}"
+				th:class="${#fields.hasErrors('googleUrl')} ? 'field-error'" />
+			<div class="form-actions">
+				<input type="submit" value="Save" />
+			</div>
+		</form>
+	</div>
+</body>
+</html>

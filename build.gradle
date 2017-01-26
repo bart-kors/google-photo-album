@@ -1,0 +1,48 @@
+buildscript {
+	ext {
+		springBootVersion = '1.4.1.RELEASE'
+	}
+	repositories {
+		mavenCentral()
+	}
+	dependencies {
+		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+	}
+}
+
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'spring-boot'
+apply plugin: 'war'
+apply from: 'https://raw.github.com/akhikhl/gretty/master/pluginScripts/gretty.plugin'
+
+jar {
+	baseName = 'google-photos-album'
+	version = '0.0.1-SNAPSHOT'
+}
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+repositories {
+	mavenCentral()
+}
+
+
+dependencies {
+	compile('org.springframework.boot:spring-boot-starter-data-jpa')
+	compile('org.springframework.boot:spring-boot-starter-web')
+	compile("org.springframework.boot:spring-boot-starter-thymeleaf")
+	compile("org.hibernate:hibernate-validator")
+	compile('io.github.bonigarcia:webdrivermanager:1.5.1') {
+        exclude group: 'org.seleniumhq.selenium'
+    }
+    compile group: 'org.seleniumhq.selenium', name: 'selenium-java', version: '3.0.1'
+    compile group: 'com.jayway.awaitility', name: 'awaitility', version: '1.7.0'
+  	testCompile('org.springframework.boot:spring-boot-starter-test')
+	gretty group: 'com.h2database', name: 'h2', version: '1.4.193'
+
+}
+
+gretty {
+    servletContainer = 'jetty9'
+}

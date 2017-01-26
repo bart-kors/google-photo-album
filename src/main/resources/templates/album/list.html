@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+	layout:decorator="layout">
+<head>
+<title>Albums : View all</title>
+</head>
+<body>
+
+	<div layout:fragment="content" class="container">
+		<div class="alert alert-success" th:if="${globalMessage}"
+			 th:text="${globalMessage}">Some Success message</div>
+		<div class="pull-right">
+			<a href="form.html" th:href="@{/(form)}">Create Album</a>
+		</div>
+		<table class="table table-bordered table-striped">
+			<thead>
+				<tr>
+					<td>Google url</td>
+					<td>Title</td>
+					<td>downloaded</td>
+                    <td>&nbsp;</td>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:if="${albums.empty}">
+					<td colspan="3">No albums</td>
+				</tr>
+				<tr th:each="album : ${albums}">
+					<td th:text="${album.googleUrl}">https:/google.com</td>
+					<td th:text="${album.name}"> name </td>
+					<td th:text="${album.downloaded}">downloaded</td>
+                    <td><a href="delete.html" th:href="@{'/delete/' + ${album.id}}"> Delete </a></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</body>
+</html>

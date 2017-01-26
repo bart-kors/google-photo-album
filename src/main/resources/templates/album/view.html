@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" >
+
+<head>
+    <title>Google Albums</title>
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+
+    <script type="text/javascript" src="js/jquery.nanogallery.min.js"></script>
+
+    <link rel="stylesheet" th:href="@{/css/nanogallery.min.css}"
+          href="css/nanogallery.min.css" />
+</head>
+<body bgcolor="#000000">
+    <div id="nanoGallery">
+
+    </div>
+
+    <script>
+
+        $.get( "allAlbums", function( data ) {
+
+            $("#nanoGallery").nanoGallery({
+                thumbnailWidth:'auto',
+                thumbnailHeight:300,
+                thumbnailLabel:{display:false},
+                thumbnailL1Label:{display:true,hideIcons:false,align:'center'},
+                thumbnailHoverEffect:'borderLighter',
+                colorScheme: 'dark',
+                items:data
+            },"json");
+        });
+
+
+    </script>
+</body>
+</html>
